@@ -17,6 +17,7 @@ vllm = "^0.8.1"
 bitsandbytes = ">=0.45.3"
 flashinfer-python = "~0.2.3"
 setuptools = ">=70.0.0"
+urllib3 = ">=1.24.2"
 
 [tool.poetry.group.test]
 optional = true
