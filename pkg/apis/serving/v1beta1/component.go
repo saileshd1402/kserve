@@ -130,6 +130,9 @@ type ComponentExtensionSpec struct {
 	// The deployment strategy to use to replace existing pods with new ones. Only applicable for raw deployment mode.
 	// +optional
 	DeploymentStrategy *appsv1.DeploymentStrategy `json:"deploymentStrategy,omitempty"`
+	// The deployment progress deadline in seconds to be set in the deployment. Only applicable for raw deployment mode.
+	// +optional
+	DeploymentProgressDeadline *int32 `json:"deploymentProgressDeadline,omitempty"`
 }
 
 type AutoScalingSpec struct {

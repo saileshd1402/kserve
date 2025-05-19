@@ -191,6 +191,9 @@ func createRawWorkerDeployment(componentMeta metav1.ObjectMeta,
 	if componentExt.DeploymentStrategy != nil {
 		deployment.Spec.Strategy = *componentExt.DeploymentStrategy
 	}
+	if componentExt.DeploymentProgressDeadline != nil {
+		deployment.Spec.ProgressDeadlineSeconds = componentExt.DeploymentProgressDeadline
+	}
 	setDefaultDeploymentSpec(&deployment.Spec)
 
 	// For multinode, it needs to keep original pods until new pods are ready with rollingUpdate strategy

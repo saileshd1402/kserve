@@ -7438,6 +7438,9 @@ spec:
                       - name
                       type: object
                     type: array
+                  deploymentProgressDeadline:
+                    format: int32
+                    type: integer
                   deploymentStrategy:
                     properties:
                       rollingUpdate:
@@ -10578,6 +10581,9 @@ spec:
                       - name
                       type: object
                     type: array
+                  deploymentProgressDeadline:
+                    format: int32
+                    type: integer
                   deploymentStrategy:
                     properties:
                       rollingUpdate:
@@ -24891,6 +24897,9 @@ spec:
                       - name
                       type: object
                     type: array
+                  deploymentProgressDeadline:
+                    format: int32
+                    type: integer
                   deploymentStrategy:
                     properties:
                       rollingUpdate:
