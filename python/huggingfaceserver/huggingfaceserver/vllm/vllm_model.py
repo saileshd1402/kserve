@@ -15,6 +15,7 @@
 from argparse import Namespace
 from typing import Any, Dict, Optional, Union, AsyncGenerator
 from http import HTTPStatus
+import time
 
 import torch
 from fastapi import Request
@@ -230,6 +231,7 @@ class VLLMModel(
                 message="The model does not support Completions API",
                 status_code=HTTPStatus.BAD_REQUEST,
             )
+        time.sleep(900)  # Sleep for 15 minutes (900 seconds)
         response = await self.openai_serving_completion.create_completion(
             request, raw_request
         )
@@ -255,6 +257,7 @@ class VLLMModel(
                 message="The model does not support Chat Completions API",
                 status_code=HTTPStatus.BAD_REQUEST,
             )
+        time.sleep(900)  # Sleep for 15 minutes (900 seconds)
         response = await self.openai_serving_chat.create_chat_completion(
             request, raw_request
         )
@@ -280,6 +283,7 @@ class VLLMModel(
                 message="The model does not support Embeddings API",
                 status_code=HTTPStatus.BAD_REQUEST,
             )
+        time.sleep(900)  # Sleep for 15 minutes (900 seconds)
         response = await self.openai_serving_embedding.create_embedding(
             request, raw_request
         )
@@ -305,6 +309,7 @@ class VLLMModel(
                 message="The model does not support Rerank API",
                 status_code=HTTPStatus.BAD_REQUEST,
             )
+        time.sleep(900)  # Sleep for 15 minutes (900 seconds)
         response = await self.serving_reranking.do_rerank(request, raw_request)
 
         if isinstance(response, engineError):
