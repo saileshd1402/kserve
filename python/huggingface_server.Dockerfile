@@ -53,6 +53,8 @@ FROM base AS build
 
 ARG WORKSPACE_DIR
 ARG VLLM_VERSION=0.9.2
+ARG VLLM_REPO_URL=https://github.com/saileshd1402/vllm.git
+ARG VLLM_BRANCH=v0.9.2-debug
 ARG LMCACHE_VERSION=0.3.0
 ARG FLASHINFER_VERSION=0.2.6.post1
 # Need a separate CUDA arch list for flashinfer because '7.0' is not supported by flashinfer
@@ -81,7 +83,12 @@ RUN --mount=type=cache,target=/root/.cache/uv cd huggingfaceserver && uv sync --
 # Install vllm
 # https://docs.vllm.ai/en/latest/models/extensions/runai_model_streamer.html, https://docs.vllm.ai/en/latest/models/extensions/tensorizer.html
 # https://docs.vllm.ai/en/latest/models/extensions/fastsafetensor.html
-RUN --mount=type=cache,target=/root/.cache/pip pip install vllm[runai,tensorizer,fastsafetensors]==${VLLM_VERSION}
+RUN --mount=type=cache,target=/root/.cache/pip \
+    git clone --recursive ${VLLM_REPO_URL} vllm && \
+    cd vllm && \
+    git checkout ${VLLM_BRANCH} && \
+    pip install .[runai,tensorizer,fastsafetensors] && \
+    cd .. && rm -rf vllm
 
 # Install lmcache
 RUN --mount=type=cache,target=/root/.cache/pip pip install lmcache==${LMCACHE_VERSION}

@@ -80,6 +80,8 @@ RUN pip install --no-cache --extra-index-url ${TORCH_EXTRA_INDEX_URL} --extra-in
 
 # install vllm
 ARG VLLM_VERSION=0.9.2
+ARG VLLM_REPO_URL=https://github.com/saileshd1402/vllm.git
+ARG VLLM_BRANCH=v0.9.2-debug
 ARG VLLM_CPU_DISABLE_AVX512=true
 ENV VLLM_CPU_DISABLE_AVX512=${VLLM_CPU_DISABLE_AVX512}
 ARG VLLM_CPU_AVX512BF16=1
@@ -87,7 +89,7 @@ ENV VLLM_CPU_AVX512BF16=${VLLM_CPU_AVX512BF16}
 ARG VLLM_TARGET_DEVICE=cpu
 ENV VLLM_TARGET_DEVICE=${VLLM_TARGET_DEVICE}
 # Clone vLLM repo
-RUN git clone --single-branch --branch v${VLLM_VERSION} https://github.com/vllm-project/vllm.git
+RUN git clone --single-branch --branch ${VLLM_BRANCH} ${VLLM_REPO_URL}
 
 # Install vLLM build requirements
 RUN cd vllm && \
